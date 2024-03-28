@@ -69,15 +69,10 @@ export default function ChessLogic({ fetchedData }) {
   const nextMove = () => {
     if (moveIndex < moveNotation.length - 1) {
       setMoveIndex(prevIndex => prevIndex + 1);
-      // Access the updated value of moveIndex
-      console.log("Updated moveIndex after nextMove:", moveIndex + 1);
       setCurrentMove(moveNotation[moveIndex + 1].notation.notation);
-      // Access the updated value of currentMove
-      console.log("Current move after nextMove:", moveNotation[moveIndex + 1].notation.notation);
     } else {
       console.log("No more available moves");
-      setMoveIndex(-1);
-      setCurrentMove('');
+      
     }
   }
   
@@ -85,13 +80,12 @@ export default function ChessLogic({ fetchedData }) {
     if (moveIndex > 0) {
       setMoveIndex(prevIndex => prevIndex - 1);
       // Access the updated value of moveIndex
-      console.log("Updated moveIndex after undoMove:", moveIndex - 1);
       setCurrentMove(moveNotation[moveIndex - 1].notation.notation);
       // Access the updated value of currentMove
-      console.log("Current move after undoMove:", moveNotation[moveIndex - 1].notation.notation);
     } else {
       console.log("No more available moves");
-      return;
+      setMoveIndex(-1);
+      setCurrentMove('');
     }
   }
   
@@ -110,8 +104,10 @@ export default function ChessLogic({ fetchedData }) {
       <button onClick={nextMove}>Next Move</button>
       <button onClick={undoMove}>Undo Move</button>
       <button>Fast Forward</button>
+      <p>{currentMove}</p>
+      <p>{moveIndex}</p>
     </div>
-  );
+  )
 }
 
 
