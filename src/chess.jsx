@@ -3,109 +3,58 @@ import React, { useState } from 'react';
 import { Chess } from 'chess.js';
 import { parse } from '@mliebelt/pgn-parser';
 import { Chessboard } from 'react-chessboard';
-  
-  // let game, gameMove 
-  // try {
-  //   game = parse(fetchedData)
-  //   console.log(game)
-  //   gameMove = game[0].moves[0].notation.notation
-  //   console.log(gameMove)
-  // } catch (error) {
-  //   console.log('Error Parsing PGN: ', error);
-  // }
+    
+export default function ChessLogic({ fetchedData, fenData }) {
+  const [game, setGame] = useState(new Chess());
+  const [moveIndex, setMoveIndex] = useState(-1);
+  const [moveNotation, setMoveNotation] = useState([]);
 
-  // export default function ChessLogic({ fetchedData }) {
-  //   const [game] = useState(new Chess());
-  //   const [fen, setFen] = useState('start');
-  
-  //   const handleMove = (targetSquare) => {
-  //     const possibleMoves = game.move({ verbose: true });
-  //     const move = possibleMoves.find((m) => m.to === targetSquare);
-  
-  //     if (!move) return;
-  
-  //     const sourceSquare = move.from;
-  //     game.move({ from: sourceSquare, to: targetSquare });
-  
-  //     setFen(game.fen());
-  //   };
-  
-  //   if (fetchedData) {
-  //     try {
-  //       const gameData = parse(fetchedData);
-  //       if (gameData && gameData.length > 0) {
-  //         const moves = gameData[0].moves.map((move) => move.notation.notation);
-  //         moves.forEach((move) => handleMove(move));
-  //         console.log(moves)
-  //       }
-  //     } catch (error) {
-  //       console.log('Error Parsing PGN:', error);
-  //     }
-  //   }
-  
-  //   return (
-  //     <div>
-  //       <Chessboard
-  //         position={fen}
-  //         onSquareClick={(square) => handleMove(square)}
-  //       />
-  //     </div>
-  //   );
-  // }
+  const parsePgn = (data) => {
+    try {
+      const parsedPgn = parse(data);
+      console.log(parsedPgn);
+      setMoveNotation(parsedPgn[0].moves);
+    } catch (error) {
+      console.log("error", error);
+    }
+  }
 
-  
-export default function ChessLogic({ fetchedData }) {
-  const [moveIndex, setMoveIndex] = useState(0);
-  const [currentMove, setCurrentMove] = useState('');
-  let moveNotation
-
-  try{
-    const parsedPgn = parse(fetchedData);
-    moveNotation = parsedPgn[0].moves;
-  } catch(error) {
-    console.log("error", error)
+  if (fetchedData && moveNotation.length === 0) {
+    parsePgn(fetchedData);
   }
 
   const nextMove = () => {
     if (moveIndex < moveNotation.length - 1) {
+      const move = moveNotation[moveIndex + 1];
+      game.move(move.notation.notation);
       setMoveIndex(prevIndex => prevIndex + 1);
-      setCurrentMove(moveNotation[moveIndex + 1].notation.notation);
     } else {
       console.log("No more available moves");
-      
     }
   }
-  
-  const undoMove = () => {
-    if (moveIndex > 0) {
-      setMoveIndex(prevIndex => prevIndex - 1);
-      // Access the updated value of moveIndex
-      setCurrentMove(moveNotation[moveIndex - 1].notation.notation);
-      // Access the updated value of currentMove
-    } else {
-      console.log("No more available moves");
-      setMoveIndex(-1);
-      setCurrentMove('');
-    }
-  }
-  
 
+  const undoMove = () => {
+    if (moveIndex > -1) {
+      game.undo();
+      setMoveIndex(prevIndex => prevIndex - 1);
+    } else {
+      console.log("No more available moves to undo");
+    }
+  }
+  
   const resetMoves = () => {
     setMoveIndex(-1);
-    setCurrentMove('');
+    setGame(new Chess())
     console.log("Reset");
   }
- 
-  
-  
+
   return (
     <div>
       <button onClick={resetMoves}>Restart</button>
       <button onClick={nextMove}>Next Move</button>
       <button onClick={undoMove}>Undo Move</button>
       <button>Fast Forward</button>
-      <p>{currentMove}</p>
-      <p>{moveIndex}</p>
+      <Chessboard position={game.fen()} />;
     </div>
   )
 }
