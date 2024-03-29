@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import ChessLogic from './chess.jsx';
 
 async function fetchIDs(userID, yearValue, monthValue, gameID) {
   let api_id_URL = `https://api.chess.com/pub/player/${userID}/games/${yearValue}/${monthValue}`
@@ -23,17 +22,16 @@ async function fetchIDs(userID, yearValue, monthValue, gameID) {
   }
 }
   
-function GameID() {
+function GameID({ setFetchedData }) {
   const [userID, setUserID] = useState("")
   const [monthValue, setMonthValue] = useState("")
   const [yearValue, setYearValue] = useState("")
   const [gameID, setGameID] = useState("")
-  const [fetchedData, setFetchedData] = useState()
   
   // Get input value on click
   const click = async () => {
     const data = await fetchIDs(userID, yearValue, monthValue, gameID)
-    setFetchedData(typeof data === 'string' ? data : data.pgn);
+    setFetchedData(typeof data === 'string' ? data : data.pgn)
   }
   
   const changeUserID = event => {
@@ -70,10 +68,6 @@ function GameID() {
       <input id="month" onChange={changeMonth} value={monthValue} />
   
       <button onClick={click}>Get Input Value</button>
-
-      {/* Rendering fetched data */}
-      <ChessLogic fetchedData={fetchedData} />;
-
     </div>
   ) 
 }

@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Chess } from 'chess.js';
 import { parse } from '@mliebelt/pgn-parser';
 import { Chessboard } from 'react-chessboard';
-    
-export default function ChessLogic({ fetchedData }) {
+
+export default function ChessLogic({ fetchedData, pgn }) {
   const [game, setGame] = useState(new Chess());
   const [moveIndex, setMoveIndex] = useState(-1);
   const [moveNotation, setMoveNotation] = useState([]);
@@ -20,7 +20,9 @@ export default function ChessLogic({ fetchedData }) {
 
   if (fetchedData && moveNotation.length === 0) {
     parsePgn(fetchedData);
-  }
+  } else if (pgn && moveNotation.length === 0) {
+    parsePgn(pgn);
+  } 
 
   const nextMove = () => {
     if (moveIndex < moveNotation.length - 1) {
@@ -43,7 +45,8 @@ export default function ChessLogic({ fetchedData }) {
   
   const resetMoves = () => {
     setMoveIndex(-1);
-    setGame(new Chess())
+    setMoveNotation([]);
+    setGame(new Chess());
     console.log("Reset");
   }
 
@@ -71,7 +74,7 @@ export default function ChessLogic({ fetchedData }) {
       <button onClick={nextMove}>Next Move</button>
       <button onClick={undoMove}>Undo Move</button>
       <button onClick={fastForward}>Fast Forward</button>
-      <Chessboard position={game.fen()} />;
+      <Chessboard id="basicBoard" position={game.fen()} />
     </div>
   )
 }

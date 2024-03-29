@@ -1,9 +1,6 @@
-import React, { useState } from 'react';
-import ChessLogic from './chess';
 import { parse } from '@mliebelt/pgn-parser';
 
-function ForPGN() {
-  const [pgn, setPGN] = useState("")
+function ForPGN({ setPgn }) {
 
   const click = () => {
     try {
@@ -15,15 +12,14 @@ function ForPGN() {
   }
 
   const inputPGN = event => {
-    setPGN(event.target.value)
+    setPgn(event.target.value)
   }
 
   return(
     <div className='pgnContainer'>
       <label htmlFor="pgnValue">PGN</label>
-      <textarea id="pgnValue" onChange = {inputPGN} value = {pgn} />
+      <textarea id="pgnValue" onChange = {inputPGN}/>
       <button onClick = {click}>Get Input Value</button>
-      <ChessLogic pgn={pgn}/>
     </div>
   )
 }
