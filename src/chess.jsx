@@ -1,10 +1,9 @@
-
 import React, { useState } from 'react';
 import { Chess } from 'chess.js';
 import { parse } from '@mliebelt/pgn-parser';
 import { Chessboard } from 'react-chessboard';
     
-export default function ChessLogic({ fetchedData, fenData }) {
+export default function ChessLogic({ fetchedData }) {
   const [game, setGame] = useState(new Chess());
   const [moveIndex, setMoveIndex] = useState(-1);
   const [moveNotation, setMoveNotation] = useState([]);
@@ -48,12 +47,30 @@ export default function ChessLogic({ fetchedData, fenData }) {
     console.log("Reset");
   }
 
+  const fastForward = () => {
+    const fastForwardStep = (index) => {
+      if (index < moveNotation.length - 1) {
+        const move = moveNotation[index + 1];
+        if (game.move(move.notation.notation)) {
+          setMoveIndex(index + 1);
+          setTimeout(() => {
+            fastForwardStep(index + 1);
+          }, 500); 
+        } else {
+          console.log("Invalid move:", move.notation.notation);
+        }
+      }
+    };
+  
+    fastForwardStep(moveIndex);
+  };
+  
   return (
     <div>
       <button onClick={resetMoves}>Restart</button>
       <button onClick={nextMove}>Next Move</button>
       <button onClick={undoMove}>Undo Move</button>
-      <button>Fast Forward</button>
+      <button onClick={fastForward}>Fast Forward</button>
       <Chessboard position={game.fen()} />;
     </div>
   )
