@@ -8,10 +8,14 @@ export default function App() {
     const [pgn, setPgn] = useState('');
   
     return (
-      <div>
-        <GameID setFetchedData={setFetchedData}/>
-        <ForPGN setPgn={setPgn}/>
-        <ChessLogic fetchedData={fetchedData} pgn={pgn} />
-      </div>
+        <>
+            <div className='inputContainer'>
+                <GameID className="gameID" setFetchedData={setFetchedData}/>
+                <ForPGN className="forPGN" setPgn={setPgn}/>
+            </div>
+            <div className='boardContainer'>
+                <ChessLogic fetchedData={fetchedData} pgn={pgn} />
+            </div>
+        </>
     )
   }
