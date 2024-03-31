@@ -69,13 +69,17 @@ export default function ChessLogic({ fetchedData, pgn }) {
   };
   
   return (
-    <div>
-      <button onClick={resetMoves}>Restart</button>
-      <button onClick={nextMove}>Next Move</button>
-      <button onClick={undoMove}>Undo Move</button>
-      <button onClick={fastForward}>Fast Forward</button>
-      <Chessboard id="basicBoard" position={game.fen()} />
-    </div>
+    <>
+      <div className="chessBoard">
+        <Chessboard className="basicBoard" position={game.fen()}/>
+      </div>
+      <div className='buttonContainer'>
+        <button onClick={resetMoves}>Restart</button>
+        <button onClick={nextMove}>Next Move</button>
+        <button onClick={undoMove}>Undo Move</button>
+        <button onClick={fastForward}>Fast Forward</button>
+      </div>
+    </>
   )
 }
 
