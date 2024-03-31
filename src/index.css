@@ -1,4 +1,51 @@
-.basicBoard {
-    height: 30px;
-    width: 30px;
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
 }
+
+.buttonContainer {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+}
+
+.inputContainer{
+    background-color: black;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    min-height: 100%;
+    flex: 0 0 30%;
+    overflow: hidden;
+
+}
+
+.boardContainer {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+#root {
+    display: flex;
+    flex-direction: row-reverse; 
+    gap: 20px;
+    height: 100%;
+}
+
+textarea {
+    width: 50px;
+
+}
+
+.chessboard {
+    width: 100%;
+    max-width: 70vh; 
+    max-height: 70vh; 
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  } 
