@@ -1,28 +1,13 @@
 import React, { useState } from 'react';
 import { Chess } from 'chess.js';
-import { parse } from '@mliebelt/pgn-parser';
 import { Chessboard } from 'react-chessboard';
+import ChessParse from './parse';
 
 export default function ChessLogic({ fetchedData, pgn }) {
-  const [game, setGame] = useState(new Chess());
+  const moveNotation = ChessParse({ fetchedData, pgn })
+  const [game] = useState(new Chess());
   const [moveIndex, setMoveIndex] = useState(-1);
-  const [moveNotation, setMoveNotation] = useState([]);
 
-  const parsePgn = (data) => {
-    try {
-      const parsedPgn = parse(data);
-      console.log(parsedPgn);
-      setMoveNotation(parsedPgn[0].moves);
-    } catch (error) {
-      console.log("error", error);
-    }
-  }
-
-  if (fetchedData && moveNotation.length === 0) {
-    parsePgn(fetchedData);
-  } else if (pgn && moveNotation.length === 0) {
-    parsePgn(pgn);
-  } 
 
   const nextMove = () => {
     if (moveIndex < moveNotation.length - 1) {
@@ -45,8 +30,7 @@ export default function ChessLogic({ fetchedData, pgn }) {
   
   const resetMoves = () => {
     setMoveIndex(-1);
-    setMoveNotation([]);
-    setGame(new Chess());
+    game.reset()
     console.log("Reset");
   }
 
@@ -70,8 +54,10 @@ export default function ChessLogic({ fetchedData, pgn }) {
   
   return (
     <>
-      <div className="chessBoard">
-        <Chessboard className="basicBoard" position={game.fen()}/>
+      <div className="chessContainer">
+        <div className='chessBoard'>
+          <Chessboard className="basicBoard" position={game.fen()} arePiecesDraggable={false} />
+        </div>
       </div>
       <div className='buttonContainer'>
         <button onClick={resetMoves}>Restart</button>
@@ -82,5 +68,3 @@ export default function ChessLogic({ fetchedData, pgn }) {
     </>
   )
 }
-
-
