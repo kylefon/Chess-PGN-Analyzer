@@ -1,6 +1,6 @@
 # Chess PGN Analyzer 
 
-A web application that allows PGN inputs from your chess games and analyzes them using stockfish.js.
+A web application that allows PGN inputs from your chess games.
 
 ## Features
 1. Input field for PGN: Allows users to input PGN of their chess games. 
@@ -14,4 +14,3 @@ A web application that allows PGN inputs from your chess games and analyzes them
 1. [Chess.js](https://github.com/jhlywa/chess.js)
 2. [pgn-parser](https://github.com/mliebelt/pgn-parser)
 3. [React-chessboard](https://github.com/Clariity/react-chessboard)
-4. [Stockfish.js](https://github.com/nmrugg/stockfish.js)
