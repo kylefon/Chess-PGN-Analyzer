@@ -1,4 +1,4 @@
-# Chess PGN Analyzer 
+# Chess PGN Viewer 
 
 A web application that allows PGN inputs from your chess games.
 
