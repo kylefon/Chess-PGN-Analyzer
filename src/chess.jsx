@@ -60,10 +60,10 @@ export default function ChessLogic({ fetchedData, pgn }) {
         </div>
       </div>
       <div className='buttonContainer'>
-        <button onClick={resetMoves}>Restart</button>
-        <button onClick={nextMove}>Next Move</button>
-        <button onClick={undoMove}>Undo Move</button>
-        <button onClick={fastForward}>Fast Forward</button>
+        <button className='restartButton' onClick={resetMoves}><img src='./images/double-chevron-left.svg' /></button>
+        <button className='undoButton' onClick={undoMove}><img src='./images/chevron-left.svg' /></button>
+        <button className='nextButton' onClick={nextMove}><img src='./images/chevron-right.svg'/></button>
+        <button className='ffButton' onClick={fastForward}><img src='./images/double-chevron-right.svg' /></button>
       </div>
     </>
   )
