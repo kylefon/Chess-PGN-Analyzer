@@ -3,6 +3,7 @@ body, html {
     padding: 0;
     height: 100%;
     background-color: #302e2b;
+    font-family: 'Monteserrat', sans-serif;
 }
 
 .buttonContainer {
@@ -19,6 +20,7 @@ body, html {
     padding: 20px;
     flex: 0 0 30%;
     margin: 20px;
+    position: relative;
 }
 
 textarea {
@@ -50,6 +52,7 @@ textarea {
     display: flex;
     flex-direction: column;
     gap: 5px;
+    text-align: center;
 }
 
 .labelInput {
@@ -58,8 +61,9 @@ textarea {
 }
 
 .getInputButton {
-    display: flex;
-    justify-content: center;
+    position: absolute;
+    width: 77%;
+    bottom: 0;
 }
 
 .getInputButton button {
@@ -71,8 +75,27 @@ textarea {
     border-radius: 12px;
     box-shadow: 0px 8px 0px 0px rgba(69,117,60,255);
     cursor: pointer;
+    margin: 40px;
+    font-weight: 1000;
 }
 
-.getInputButton button:hover {
+.getInputButton button:hover  {
     filter: brightness(130%)
+}
+
+.buttonContainer button {
+    font-weight: 1000;
+    fill: #90908e;
+    cursor: pointer;
+    border: none;
+    background-color: #302e2b;
+    border-radius: 25%;
+}
+
+.buttonContainer button:hover{
+    filter: brightness(130%)
+}
+
+p {
+    text-align: center;
 }
