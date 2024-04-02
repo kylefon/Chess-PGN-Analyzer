@@ -2,7 +2,7 @@
 
 A web application that allows PGN inputs from your chess games.
 
-![Screenshot 2024-04-02 012947](https://github.com/kylefon/Chess-PGN-Viewer/assets/100178498/1770cbef-f827-45fd-a9d2-5b60f30abc63)
+![chess-pgn-viewer-UI](https://github.com/kylefon/Chess-PGN-Viewer/assets/100178498/3f5c585f-e228-4efc-bb9f-1a24702e72c1)
 
 ## Features
 1. Input field for PGN: Allows users to input PGN of their chess games. 
