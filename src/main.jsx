@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import ChessLogic from './chess.jsx';
-import GameID from './fetch.jsx';
-import './index.css';
+import ChessLogic from '/src/chess.jsx';
+import GameID from '/src/fetch.jsx';
+import '/src/index.css';
 
 function App() {
     const [fetchedData, setFetchedData] = useState('');

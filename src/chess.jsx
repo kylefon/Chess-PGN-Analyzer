@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Chess } from 'chess.js';
 import { Chessboard } from 'react-chessboard';
-import ChessParse from './parse';
+import ChessParse from '/src/parse.jsx';
 
 export default function ChessLogic({ fetchedData, pgn }) {
   const moveNotation = ChessParse({ fetchedData, pgn })
@@ -60,10 +60,10 @@ export default function ChessLogic({ fetchedData, pgn }) {
         </div>
       </div>
       <div className='buttonContainer'>
-        <button className='restartButton' onClick={resetMoves}><img src='./images/double-chevron-left.svg' /></button>
-        <button className='undoButton' onClick={undoMove}><img src='./images/chevron-left.svg' /></button>
-        <button className='nextButton' onClick={nextMove}><img src='./images/chevron-right.svg'/></button>
-        <button className='ffButton' onClick={fastForward}><img src='./images/double-chevron-right.svg' /></button>
+        <button className='restartButton' onClick={resetMoves}><img src='images/double-chevron-left.svg' /></button>
+        <button className='undoButton' onClick={undoMove}><img src='images/chevron-left.svg' /></button>
+        <button className='nextButton' onClick={nextMove}><img src='images/chevron-right.svg'/></button>
+        <button className='ffButton' onClick={fastForward}><img src='images/double-chevron-right.svg' /></button>
       </div>
     </>
   )
