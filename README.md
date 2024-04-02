@@ -16,7 +16,7 @@ A web application that allows PGN inputs from your chess games.
 ## Installation 
 1. Clone the repo
 ```
-git clone -m "https://github.com/kylefon/Chess-PGN-Viewer.git"
+git clone https://github.com/kylefon/Chess-PGN-Viewer.git
 ```
 2. Install npm packages
 ```
